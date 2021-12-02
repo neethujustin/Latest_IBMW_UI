@@ -1,0 +1,208 @@
+<div class="jumbotron jumbotron-fluid">
+        <div class="container text-center text-lg-left">
+            <img width="20" height="20" src="../assets/img/edit.png" style="margin-left:96%" (click)="editForm()">
+
+                <div class="row">
+                  <div class="col-lg-6 user-content">
+                    <img width="200" height="200" class="rounded-circle article-img" src="../assets/img/person.jpg">
+                    <span class="details-section d-inline-block">
+                        <p></p>
+                        <p class="user-name">Gyan Ranjan Patra</p>
+                        <p class="text-muted">System Analyst</p>
+                        <br>
+                        <br>
+                        <br>
+                        <button class="addLeave-btn">+&nbsp;Leaves</button>
+                    </span>
+                    
+                  </div>
+
+                  <div class="col-lg-6 align-items-center d-flex">
+                      <form *ngIf="isEditForm" [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
+                          <div class="form-row">
+
+                              <div class="form-group  data-section col-5">
+                                  <label for="empId">EmpID:</label>
+                                  <input disabled type="text" formControlName="empId" class="col-6 form-control no-outline" [ngClass]="{ 'is-invalid': submitted && f.empId.errors }" />
+                                  <div *ngIf="submitted && f.empId.errors" class="invalid-feedback">
+                                      <div *ngIf="f.empId.errors.required">First Name is required</div>
+                                  </div>
+                              </div>
+                              <div class="form-group col-5 data-section">
+
+                                 
+                                    <label class="form-group border-lable-flt">
+                                            <input type="text" formControlName="mobileNo" class="custom-select col-12" [ngClass]="{ 'is-invalid': submitted && f.mobileNo.errors }" />
+
+                                            <span>Mobile No</span>
+                                          </label>
+                                    <div *ngIf="submitted && f.mobileNo.errors" class="invalid-feedback">
+                                        <div *ngIf="f.mobileNo.errors.required">Mobile No is required</div>
+                                    </div>
+                                </div>
+                              
+                              
+                          </div>
+                          <div class="form-row">
+                              <!-- <div class="form-group col">
+                                  <label for="email">Email</label>
+                                  <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                                  <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                      <div *ngIf="f.email.errors.required">Email is required</div>
+                                  </div>
+                              </div> -->
+                              <div class="form-group col-5 data-section">
+                                    <label for="username">UserName:</label>
+                                    <input disabled type="text" formControlName="username" class="form-control col-6" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                                        <div *ngIf="f.username.errors.required">Last Name is required</div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-5 data-section">
+                                        <label class="form-group border-lable-flt">
+                                                <select class="form-control custom-select">
+                                                  <option selected>Male</option>
+                                                  <option>Female</option>
+                                                </select>
+                                                <span>Gender</span>
+                                              </label>
+                                        <!-- <label for="gender">Gender</label>
+                                        <input type="text" formControlName="gender" class="form-control col-6" [ngClass]="{ 'is-invalid': submitted && f.gender.errors }" />
+                                        <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+                                            <div *ngIf="f.gender.errors.required">Mobile No is required</div>
+                                        </div> -->
+                                    </div>
+                             
+                             
+              
+                          </div>
+                          <div class="form-row">
+                                <div class="form-group col-5 data-section">
+                                        <label for="project">Project :</label>
+                                        <input disabled type="text" formControlName="project" class="form-control col-6" [ngClass]="{ 'is-invalid': submitted && f.project.errors }" />
+                                        <div *ngIf="submitted && f.project.errors" class="invalid-feedback">
+                                            <div *ngIf="f.project.errors.required">Mobile No is required</div>
+                                        </div>
+                                    </div>
+                                
+                                 
+                              <div class="form-group col-5 data-section">
+                                    <label class="form-group border-lable-flt">
+                                            <select class="form-control custom-select">
+                                              <option selected>Banglore</option>
+                                              <option>Kerala</option>
+                                            </select>
+                                            <span>Location</span>
+                                          </label>
+                                    <!-- <label for="location">Location: </label>
+                                    <input type="text" formControlName="location" class="form-control col-6" [ngClass]="{ 'is-invalid': submitted && f.location.errors }" />
+                                    <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
+                                        <div *ngIf="f.location.errors.required">Mobile No is required</div>
+                                    </div> -->
+                                </div>
+                              <!-- <div class="form-group col-6 data-section">
+                                  <label for="gender">Gender</label>
+                                  <input type="text" formControlName="gender" class="form-control col-6" [ngClass]="{ 'is-invalid': submitted && f.gender.errors }" />
+                                  <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+                                      <div *ngIf="f.gender.errors.required">Mobile No is required</div>
+                                  </div>
+                              </div> -->
+                            
+              
+                          </div>
+                          <div class="form-row">
+                                <div class="form-group data-section col-5">
+                                        <label class="form-group border-lable-flt">
+                                                <input type="text" formControlName="techstack" class="custom-select form-control col-12" [ngClass]="{ 'is-invalid': submitted && f.techstack.errors }" />
+
+                                                <span>Role</span>
+                                              </label>
+                                        <div *ngIf="submitted && f.techstack.errors" class="invalid-feedback">
+                                            <div *ngIf="f.techstack.errors.required">Role is required</div>
+                                        </div>
+                                    </div>
+                          </div>
+                          <div class="form-row">
+                              <div class="form-group col-12 data-section">
+                                  <label for="skills">Skills :</label>
+                                  
+                                  <ng-multiselect-dropdown *ngIf="primarySkillBoolean"
+                                  [settings]="dropdownSettings"
+                                  [data]="dropdownListPrim"
+                                  [(ngModel)]="selectedPrimItems"
+                                  formControlName="selectedPrim"
+                                  (onSelect)="onItemSelect($event)"
+                                  >
+                               </ng-multiselect-dropdown>
+                               <ng-multiselect-dropdown *ngIf="!primarySkillBoolean"
+                                  [settings]="dropdownSettings"
+                                  [data]="dropdownListSec"
+                                  [(ngModel)]="selectedSecItems"
+                                  formControlName="selectedSec"
+                                  (onSelect)="onItemSelect($event)"
+                                  >
+                               </ng-multiselect-dropdown>
+                               <span id=prim{{i}} *ngFor="let primskill of primarySkillArray ; let i = index" class="skill sec-skill">
+                                   {{primskill}}
+                                   <img  (click)="deletePrimarySkill(primskill,i)" class="primclose" width="10" height="10" src="../assets/img/close-icon.png">
+                                </span>
+
+                               <span id=sec{{j}} *ngFor="let secskill of secondarySkillArray ; let j = index" class="skill">
+                                   {{secskill}}
+                                   <img  (click)="deleteSecondarySkill(secskill,j)"class="primclose" width="10" height="10" src="../assets/img/close-icon.png">
+                                </span>
+                                  <!-- <input type="text" formControlName="skills" class="form-control col-6" [ngClass]="{ 'is-invalid': submitted && f.skills.errors }" />
+                                  <div *ngIf="submitted && f.skills.errors" class="invalid-feedback">
+                                      <div *ngIf="f.skills.errors.required">Designation is required</div>
+                                  </div> -->
+                              </div>
+                            
+              
+                          </div>
+                          
+                          <div class="form-group float-right">
+                              <p *ngIf="primarySkillBoolean"
+                              (click)="addSecondarySkill()" class="sec-skill-add">Add Secondary Skills</p>
+                              <p *ngIf="!primarySkillBoolean" (click)="addPrimarySkill()" class="sec-skill-add">Add Primary Skills</p>
+
+                              <button [disabled]="loading" class="btn btn-primary">
+                                  <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                  Save
+                              </button>
+                              <button [disabled]="loading" class="btn cancel">
+                                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                    cancel
+                                </button>
+              
+                          </div>
+                      </form>
+                                <ul *ngIf="!isEditForm" class="list-unstyled row">
+
+                                        <li class="list-item col-6"><b>Emp ID:</b>{{user.empId}}</li>
+                                        <li class="list-item col-6"> <b>Mobile No:</b>{{user.mobileNo}}</li>
+                                        <li class="list-item col-6"><b>UserName:</b> {{user.username}}</li>
+
+
+
+                                        <li class="list-item col-6"><b>Gender:</b>{{user.gender}}</li>
+                                        <li class="list-item col-6"><b>Tech Stack:</b>{{user.techstack}}</li>
+
+
+                                        <li class="list-item col-6"><b> Location :</b>{{user.location}}</li>
+                                        <li class="list-item col-6"><b>Project:</b>{{user.project}}</li>
+
+                                        <li style="display: inline-table;"class="list-item col-12">
+                                            <p><b>Skills:</b></p>
+                                            
+                                            <span *ngFor="let primskill of primarySkillArray" class="skill sec-skill">{{primskill}}</span>
+                                            <span *ngFor="let secskill of secondarySkillArray" class="skill">{{secskill}}</span>
+                                        </li>
+
+
+                                        
+                                    </ul>
+                     
+                  </div>
+                </div>
+         </div>
+  </div>

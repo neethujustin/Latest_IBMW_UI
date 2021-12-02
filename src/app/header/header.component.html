@@ -1,0 +1,43 @@
+<!-- <div *ngIf="user"></div> -->
+    <!-- <app-home></app-home> -->
+    <div class="navbar navbar-expand-lg navbar-dark nav-custom">
+        <div class="container">
+            <a href="" class="navbar-brand">IBM-Watson</a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#main-navbar" aria-expanded="true">
+      <span class="ti-menu"></span>
+    </button>
+            <div class="collapse navbar-collapse" id="main-navbar">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                        <a routerLink="/" class="nav-link">My Info</a>
+                    </li>
+                    <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                        <a routerLink="/teaminfo" class="nav-link">Team Info</a>
+                    </li>
+                    <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                        <a routerLink="/leavetracker" class="nav-link" >Leave Tracker</a>
+                    </li>
+                    <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                        <a routerLink="/aboutus"class="nav-link" >About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Ranjan</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Microsoft</a>
+                            <a class="dropdown-item" href="#">JAVA</a>
+                            <a class="dropdown-item" href="#">Database</a>
+                        </div>
+                    </li>
+                    <li>
+                        <img width="40" height="40" class="rounded-circle article-img" src="../assets/img/person.jpg" id="img"> 
+
+                    </li>
+                </ul>
+                <!-- <ul class="nav ml-auto">
+                    <li class="nav-item">
+                        <button class="btn btn-fab btn-theme no-shadow" (click)="logout()">Logout</button>
+                    </li>
+                </ul> -->
+            </div>
+        </div>
+    </div>
