@@ -1,5 +1,8 @@
 <div class="jumbotron jumbotron-fluid">
-	<div class="container text-center text-lg-left"> <img width="20" height="20" src="../assets/img/edit.png" style="margin-bottom: 1%;
+	<div class="container text-center text-lg-left">
+         <img *ngIf="!isEditForm" width="20" height="20" src="../assets/img/edit.png" style="margin-bottom: 1%;
+            margin-left:96%;cursor: pointer;" (click)="editForm()">
+        <img *ngIf="isEditForm" width="20" height="20" src="../assets/img/edit-active.png" style="margin-bottom: 1%;
             margin-left:96%;cursor: pointer;" (click)="editForm()">
 		<div class="row">
 			<div class="col-lg-6 user-content">
