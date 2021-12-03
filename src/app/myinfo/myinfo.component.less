@@ -6,6 +6,7 @@
     background: #fbfbfb;
     border-radius: 8px;
     box-shadow: 0px 4px 18px #888888;
+    font: normal normal normal 14px/16px Helvetica Neue
 }
 .user-name{
     font-size: 23px;
@@ -31,11 +32,11 @@ b{
 
 }
 .article-img{
-    margin-top: -109px;
+    // margin-top: -109px;
 
 }
 .details-section{
-    padding-left: 25px;
+    padding-left: 65px;
 }
 
 .addLeave-btn{
@@ -48,6 +49,7 @@ b{
 }
 .user-content{
     border-right: 1px solid #dfdfdf;
+    padding-left: 4%;
 }
 .sec-skill-add{
     text-align: left;
@@ -64,7 +66,7 @@ cursor: pointer;
     cursor: pointer;
 }
 .skill{
-    margin-top: 24px;
+    margin-top: 9px;
     border: 1px solid #909192;
     border-radius: 13px;
     padding: 3px;
@@ -199,5 +201,137 @@ opacity: 1;
   box-shadow: 0 0 0 0.2rem rgba(0, 102, 51, 0.25);
 }
 
-  
-  
+.hovereffect {
+  width: 200px;
+  height: 200px;
+  /* width: 100%; */
+  border-radius: 77px;
+  float: left;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  cursor: default;
+}
+
+.hovereffect .overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  background-color: rgba(0,0,0,0.5);
+  -webkit-transition: all 0.4s cubic-bezier(0.88,-0.99, 0, 1.81);
+  transition: all 0.4s cubic-bezier(0.88,-0.99, 0, 1.81);
+}
+
+.hovereffect img {
+  display: block;
+  position: relative;
+  -webkit-transition: all 0.4s cubic-bezier(0.88,-0.99, 0, 1.81);
+  transition: all 0.4s cubic-bezier(0.88,-0.99, 0, 1.81);
+}
+
+.hovereffect h2 {
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  font-size: 17px;
+  background: rgba(0,0,0,0.6);
+  -webkit-transform: translatey(-100px);
+  -ms-transform: translatey(-100px);
+  transform: translatey(-100px);
+  -webkit-transition: all 0.4s cubic-bezier(0.88,-0.99, 0, 1.81);
+  transition: all 0.4s cubic-bezier(0.88,-0.99, 0, 1.81);
+  padding: 10px;
+}
+
+.hovereffect .info  {
+  text-decoration: none;
+  display: inline-block;
+  color: #fff;
+  border: 1px solid #fff;
+  background-color: transparent;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  // margin: 50px 0 0;
+  padding: 7px 14px;
+}
+
+.hovereffect .info:hover {
+  box-shadow: 0 0 5px #fff;
+}
+
+.hovereffect:hover img {
+  -ms-transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
+.hovereffect:hover .overlay {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+
+.hovereffect:hover h2,.hovereffect:hover .info {
+  opacity: 1;
+  filter: alpha(opacity=100);
+  -ms-transform: translatey(0);
+  -webkit-transform: translatey(0);
+  transform: translatey(0);
+}
+
+.hovereffect:hover .info {
+  -webkit-transition-delay: .2s;
+  transition-delay: .2s;
+}
+  .info-label{
+    color: #fff;
+    border: 1px solid #fff;
+    background-color: transparent;
+      display: inline-block;
+      color: white;
+      padding: 0.5rem;
+      font-weight: normal;      
+      cursor: pointer;
+      margin-top: 1rem;
+    
+  }
+
+  .calendar, .calendar:active {
+    width: 2.75rem;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAcCAYAAAAEN20fAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAEUSURBVEiJ7ZQxToVAEIY/YCHGxN6XGOIpnpaEsBSeQC9ArZbm9TZ6ADyBNzAhQGGl8Riv4BLAWAgmkpBYkH1b8FWT2WK/zJ8ZJ4qiI6XUI3ANnGKWBnht2/ZBDRK3hgVGNsCd7/ui+JkEIrKtqurLpEWaphd933+IyI3LEIdpCYCiKD6HcuOa/nwOa0ScJEnk0BJg0UTUWJRl6RxCYEzEmomsIlPU3IPW+grIAbquy+q6fluy/28RIBeRMwDXdXMgXLj/B2uimRXpui4D9sBeRLKl+1N+L+t6RwbWrZliTTTr1oxYtzVWiTQAcRxvTX+eJMnlUDaO1vpZRO5NS0x48sIwfPc87xg4B04MCzQi8hIEwe4bl1DnFMCN2zsAAAAASUVORK5CYII=') !important;
+    background-repeat: no-repeat;
+    background-size: 23px;
+    background-position: center;
+  }
+  .from-date-block,.to-date-block{
+    margin-bottom: 5%;
+}
+
+.save-button{
+  margin-left: 92px;
+
+}
+.cancel{
+  color: white
+}
+.invalid-feedback {
+  display: block;
+  width: 100%;
+  margin-top: -0.75rem;
+  margin-bottom: 8px;
+  font-size: 80%;
+  color: #dc3545;
+}
+
+.multiselect-dropdown .dropdown-btn .selected-item-container .selected-item{
+  border: 1px solid #0072c7;
+    background: #0072c7;
+}
+
