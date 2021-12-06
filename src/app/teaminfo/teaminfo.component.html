@@ -1,8 +1,25 @@
 <div class="container">
 <h1>Team Info</h1>
-<table class="table table-condensed">
-        <thead>
-            <tr>
+<div class="col-12">
+        <div class="form-group col-2 data-section float-right">
+                <label class="form-group border-lable-flt">
+                    <select class="custom-select">
+                        <option>fdsf</option>
+                    </select> <span>Skill</span> </label>
+            
+            </div>
+            <div class="form-group col-2 data-section float-right">
+                    <label class="form-group border-lable-flt">
+                        <select class="custom-select">
+                            <option>fsd</option>
+                        </select> <span>Project</span> </label>
+                 
+                </div>
+</div>
+
+<table class="table table-hover table-condensed table-striped">
+            <thead>
+            <tr class="border_bottom">
                 <th>EmpId</th>
                 <th>First Name</th>
                 <th>Last Name</th>
@@ -15,21 +32,58 @@
             </tr>
         </thead>
         <tbody>
-            <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle rounded-pill">
+            
+        <ng-container *ngFor="let user of users ;  let i=index">
+            <tr (click)="clicked(i)"  [style.display]="i/pageSize>=page || i/pageSize<(page-1)?'none':null" class="border_bottom" data-toggle="collapse" [attr.data-target]="'#'+user.firstName" class="accordion-toggle rounded-pill">
                 <td>1234</td>
-                <td>Neethu</td>
-                <td>Justin</td>
-                <td>FHIR</td>
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
+                <td class="project-td btn btn-outline-secondary mr-2" placement="top" ngbTooltip="Tooltip on top">
+                        FHIR
+                      </td>
                 <td>Angular</td>
-                <td >neethu.justin@ust.com</td>
+                <td>{{user.email}}</td>
                 <td>xxxxxxxxxx</td>
                 <td>+</td>
+            </tr>
+            <tr id="details{{i}}" class="data-row" [style.display]="i/pageSize>=page || i/pageSize<(page-1)?'none':null">
+                <td colspan="12" class="hiddenRow">
+                    <div class="accordian-body collapse" id="{{user.firstName}}">  
+                            <div class="col-lg-6 align-items-center d-flex">
+                                    <ul class="list-unstyled row">
+                                            <li class="list-item col-4"> <b>Mobile No:</b>xxxxxxx</li>
+                                            <li class="list-item col-6"><b>Role:</b>UI Developer</li>
+                                            
 
+                                            <li class="list-item col-4"><b>Gender:</b>Male</li>
+                                            <li class="list-item col-3" ><b>Project:</b>FHIR</li>
+                                            <li class="list-item col-12"><b> Location :</b>Kochi</li>
+                                            <li  class="list-item col-12"><b>Skill:</b>
+                                                <span class="skill sec-skill">skill1</span> 
+                                                <span class="skill sec-skill">skill2</span> 
+
+                                                <span class="skill">sec1</span> 
+                                                <span class="skill">sec2</span>
+                                                <span class="skill sec-skill">skill1</span> 
+                                                <span class="skill sec-skill">skill2</span> 
+
+                                                <span class="skill">sec1</span> 
+                                                <span class="skill">sec2</span>
+                                                <span class="skill sec-skill">skill1</span> 
+                                                <span class="skill sec-skill">skill2</span> 
+
+                                                <span class="skill">sec1</span> 
+                                                <span class="skill">sec2</span>
+                                            </li>
+                                            
+
+                                        </ul>
+                            </div>
+                    </div> 
+                </td>
             </tr>
-            <tr class="hiddenRow" >
-                <td colspan="12" class="hiddenRow"><div class="accordian-body collapse" id="demo1"> Demo1 </div> </td>
-            </tr>
-            <tr data-toggle="collapse" data-target="#demo2" class="accordion-toggle">
+            </ng-container>
+            <!-- <tr class="border_bottom" data-toggle="collapse" data-target="#demo2" class="accordion-toggle">
                     <td>1234</td>
                     <td>Neethu</td>
                     <td>Justin</td>
@@ -40,32 +94,42 @@
                     <td>+</td>
             </tr>
             <tr>
-                <td colspan="12" class="hiddenRow"><div id="demo2" class="accordian-body collapse">
-                        <ul  class="list-unstyled row">
+                <td colspan="12" class="hiddenRow">
+                    <div id="demo2" class="accordian-body collapse">
+                            <div class="col-lg-6 align-items-center d-flex">
+                                    <ul class="list-unstyled row">
+                                            <li class="list-item col-4"> <b>Mobile No:</b>xxxxxxx</li>
+                                            <li class="list-item col-6"><b>Role:</b>UI Developer</li>
+                                            
 
-                                <li class="list-item col-3"> <b>Mobile No:</b>fdsfds</li>
-                                <li class="list-item col-3"><b>Gender:</b>fdsfds</li>
-                                <li class="list-item col-12"><b> Location :</b>fdsfds</li>
-                                <li class="list-item col-3"><b>Tech Stack:</b>fdsfds</li>
+                                            <li class="list-item col-4"><b>Gender:</b>Male</li>
+                                            <li class="list-item col-3"><b>Project:</b>FHIR</li>
+                                            <li class="list-item col-12"><b> Location :</b>Kochi</li>
+                                            <li  class="list-item col-12"><b>Skill:</b>
+                                                <span class="skill sec-skill">skill1</span> 
+                                                <span class="skill sec-skill">skill2</span> 
 
+                                                <span class="skill">sec1</span> 
+                                                <span class="skill">sec2</span>
+                                                <span class="skill sec-skill">skill1</span> 
+                                                <span class="skill sec-skill">skill2</span> 
 
+                                                <span class="skill">sec1</span> 
+                                                <span class="skill">sec2</span>
+                                                <span class="skill sec-skill">skill1</span> 
+                                                <span class="skill sec-skill">skill2</span> 
 
+                                                <span class="skill">sec1</span> 
+                                                <span class="skill">sec2</span>
+                                            </li>
+                                            
 
-
-
-                                <li class="list-item col-3"><b>Project:</b>fdsfds</li>
-
-                                <li style="display: inline-table;"class="list-item col-12">
-                                    <p><b>Skills:</b></p>
-                                    
-                                    <span  class="skill">fdsfds</span></li>
-
-
-                                
-                            </ul>    
-                </div></td>
+                                        </ul>
+                            </div>
+                    </div>
+            </td>
             </tr>
-            <tr data-toggle="collapse" data-target="#demo3" class="accordion-toggle">
+            <tr class="border_bottom" data-toggle="collapse" data-target="#demo3" class="accordion-toggle">
                     <td>1234</td>
                     <td>Neethu</td>
                     <td>Justin</td>
@@ -78,8 +142,9 @@
             </tr>
             <tr>
                 <td colspan="12"  class="hiddenRow"><div id="demo3" class="accordian-body collapse">Demo3</div></td>
-            </tr>
+            </tr> -->
         </tbody>
     </table>
-    
+    <ngb-pagination class="float-right"  [collectionSize]="totalSize" [(page)]="page" [pageSize]="pageSize" [rotate]="true" [ellipses]="true"aria-label="Default pagination"></ngb-pagination>
+
 </div>

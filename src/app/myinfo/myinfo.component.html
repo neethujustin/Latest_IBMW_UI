@@ -9,8 +9,8 @@
 						<label class="info info-label" for="upload">Upload Photo</label> <a class="info" href="#">Remove Photo</a> </div>
 				</div> <span class="details-section d-inline-block">
                         <p></p>
-                        <p class="user-name">Gyan Ranjan Patra</p>
-                        <p class="text-muted">System Analyst</p>
+                        <p class="user-name"><span class="user-name">{{user.firstName}}</span>&nbsp;<span class="user-name">{{user.middleName}}</span>&nbsp;<span class="user-name">{{user.lastName}}</span>
+                        <p class="text-muted">{{user.designation.title}}</p>
                         <br>
                         <br>
                         <br>
@@ -35,36 +35,22 @@
 						</div>
 					</div>
 					<div class="form-row">
-						<!-- <div class="form-group col">
-                                  <label for="email">Email</label>
-                                  <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                                  <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                                      <div *ngIf="f.email.errors.required">Email is required</div>
-                                  </div>
-                              </div> -->
 						<div class="form-group col-5 data-section">
 							<label for="username">UserName:</label>
-							<input disabled type="text" formControlName="username" class="form-control col-6" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-							<div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-								<div *ngIf="f.username.errors.required">Last Name is required</div>
-							</div>
+							<input title="{{f.username.value}}" disabled type="text" formControlName="username" class="form-control col-8" />
 						</div>
 						<div class="form-group col-5 data-section">
 							<label class="form-group border-lable-flt">
-								<select class="custom-select" formControlName="gender">
-									<option *ngFor="let gender of user.allGender" [value]="gender" [attr.selected]="gender==user.gender?'selected':null">{{gender}}</option>
+										<select class="custom-select" formControlName="gender">
+
+									<option *ngFor="let gender of allGender" [value]="gender" [attr.selected]="gender==user.gender?'selected':null">{{gender}}</option>
 								</select> <span>Gender</span> </label>
-							<!-- <label for="gender">Gender</label>
-                                        <input type="text" formControlName="gender" class="form-control col-6" [ngClass]="{ 'is-invalid': submitted && f.gender.errors }" />
-                                        <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
-                                            <div *ngIf="f.gender.errors.required">Mobile No is required</div>
-                                        </div> -->
 						</div>
 					</div>
 					<div class="form-row">
 						<div class="form-group col-5 data-section">
 							<label for="project">Project :</label>
-							<input disabled type="text" formControlName="project" class="form-control col-6" [ngClass]="{ 'is-invalid': submitted && f.project.errors }" />
+							<input disabled type="text" title="{{f.project.value}}" formControlName="project" class="form-control col-6" [ngClass]="{ 'is-invalid': submitted && f.project.errors }" />
 							<div *ngIf="submitted && f.project.errors" class="invalid-feedback">
 								<div *ngIf="f.project.errors.required">Mobile No is required</div>
 							</div>
@@ -72,21 +58,10 @@
 						<div class="form-group col-5 data-section">
 							<label class="form-group border-lable-flt">
 								<select class="custom-select" formControlName="location">
-									<option *ngFor="let location of user.allLocations" [value]="location" [attr.selected]="location==user.location?'selected':null">{{location}}</option>
+									<option *ngFor="let location of allInfos.commonInfo.locations" [value]="location" [attr.selected]="location==user.location.name?'selected':null">{{location}}</option>
 								</select> <span>Location</span> </label>
-							<!-- <label for="location">Location: </label>
-                                    <input type="text" formControlName="location" class="form-control col-6" [ngClass]="{ 'is-invalid': submitted && f.location.errors }" />
-                                    <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
-                                        <div *ngIf="f.location.errors.required">Mobile No is required</div>
-                                    </div> -->
 						</div>
-						<!-- <div class="form-group col-6 data-section">
-                                  <label for="gender">Gender</label>
-                                  <input type="text" formControlName="gender" class="form-control col-6" [ngClass]="{ 'is-invalid': submitted && f.gender.errors }" />
-                                  <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
-                                      <div *ngIf="f.gender.errors.required">Mobile No is required</div>
-                                  </div>
-                              </div> --></div>
+					</div>
 					<div class="form-row">
 						<div class="form-group data-section col-5">
 							<label class="form-group border-lable-flt">
@@ -100,17 +75,13 @@
 						<div class="col-11 data-section">
 							<label for="skills">Skills : <span *ngIf="primarySkillBoolean">Primary</span> <span *ngIf="!primarySkillBoolean">Secondary</span> </label>
 							<ng-multiselect-dropdown *ngIf="primarySkillBoolean" [placeholder]="'Select Primary Skills'" [settings]="dropdownSettings" [data]="dropdownListPrim" [(ngModel)]="selectedPrimItems" formControlName="selectedPrim" (onSelect)="onItemSelectPrimary($event)" (onDeSelect)="onItemDeSelectPrimary($event)"> </ng-multiselect-dropdown>
-							<ng-multiselect-dropdown *ngIf="!primarySkillBoolean" [placeholder]="'Select Secondary Skills'" [settings]="dropdownSettings" [data]="dropdownListSec" [(ngModel)]="selectedSecItems" formControlName="selectedSec" (onSelect)="onItemSelectSecondary($event)" (onDeSelect)="onItemDeSelectSecondary($event)"> </ng-multiselect-dropdown> <span id=prim{{i}} *ngFor="let primskill of primarySkillArray ; let i = index" class="skill sec-skill">
+							<ng-multiselect-dropdown *ngIf="!primarySkillBoolean" [placeholder]="'Select Secondary Skills'" [settings]="dropdownSettings" [data]="dropdownListSec" [(ngModel)]="selectedSecItems" formControlName="selectedSec" (onSelect)="onItemSelectSecondary($event)" (onDeSelect)="onItemDeSelectSecondary($event)"> </ng-multiselect-dropdown> <span id=prim{{i}} *ngFor="let primskill of primary ; let i = index" class="skill sec-skill">
                                    {{primskill}}
                                    <img  (click)="deletePrimarySkill(primskill,i)" class="primclose" width="10" height="10" src="../assets/img/close-icon.png">
-                                </span> <span id=sec{{j}} *ngFor="let secskill of secondarySkillArray ; let j = index" class="skill">
+                                </span> <span id=sec{{j}} *ngFor="let secskill of secondary ; let j = index" class="skill">
                                    {{secskill}}
                                    <img  (click)="deleteSecondarySkill(secskill,j)"class="primclose" width="10" height="10" src="../assets/img/close-icon.png">
                                 </span>
-							<!-- <input type="text" formControlName="skills" class="form-control col-6" [ngClass]="{ 'is-invalid': submitted && f.skills.errors }" />
-                                  <div *ngIf="submitted && f.skills.errors" class="invalid-feedback">
-                                      <div *ngIf="f.skills.errors.required">Designation is required</div>
-                                  </div> -->
 						</div>
 					</div>
 					<div class="form-group float-right">
@@ -123,13 +94,13 @@
 				<ul *ngIf="!isEditForm" class="list-unstyled row">
 					<li class="list-item col-6"><b>Emp ID:</b>{{user.empId}}</li>
 					<li class="list-item col-6"> <b>Mobile No:</b>{{user.mobileNo}}</li>
-					<li class="list-item col-6"><b>UserName:</b> {{user.username}}</li>
+					<li class="list-item col-6"><b>UserName:</b> {{user.email}}</li>
 					<li class="list-item col-6"><b>Gender:</b>{{user.gender}}</li>
-					<li class="list-item col-6"><b>Tech Stack:</b>{{user.techstack}}</li>
-					<li class="list-item col-6"><b> Location :</b>{{user.location}}</li>
-					<li class="list-item col-6"><b>Project:</b>{{user.project}}</li>
+					<li class="list-item col-6"><b>Roles:</b><span *ngFor="let roles of user.techRoles">{{roles.title}},</span></li>
+					<li class="list-item col-6"><b> Location :</b>{{user.location.name}}</li>
+					<li class="list-item col-6"><b>Project:</b><span *ngFor="let project of user.projects">{{project.pname}},</span></li>
 					<li style="display: inline-table;" class="list-item col-12">
-						<p><b>Skills:</b></p> <span *ngFor="let primskill of primarySkillArray" class="skill sec-skill">{{primskill}}</span> <span *ngFor="let secskill of secondarySkillArray" class="skill">{{secskill}}</span> </li>
+						<p><b>Skills:</b></p> <span *ngFor="let primskill of primary" class="skill sec-skill">{{primskill}}</span> <span *ngFor="let secskill of secondary" class="skill">{{secskill}}</span> </li>
 				</ul>
 			</div>
 		</div>
@@ -164,4 +135,5 @@
 			</form>
 		</div>
 	</ng-template>
+	
 </div>

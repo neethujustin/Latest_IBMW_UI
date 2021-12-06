@@ -55,6 +55,8 @@ export class MyinfoComponent implements OnInit {
   url = '';
   imagePath;
   message;
+  primary = [];
+  secondary = [];
   primarySkillArray = [];
   secondarySkillArray = [];
   skillsObject = {};
@@ -66,7 +68,16 @@ export class MyinfoComponent implements OnInit {
   selectedSecItems = [];
   dropdownSettings: IDropdownSettings = {};
   currentLocation;
-
+    projects = [];
+    projectCommaSeparate;
+    roles = [];
+    formRole;
+    data ={};
+    skillSet = [];
+    allPrimary = [];
+    allSecondary = []
+    allInfos;
+    allGender = []; 
   //intialize variables end
 
   //get user details on constructor
@@ -77,25 +88,89 @@ export class MyinfoComponent implements OnInit {
       private router: Router,
       private alertService: AlertService) {
       // this.user = this.accountService.userValue;
-      this.user = {
-          "username": "test5",
-          "techstack": "Devops",
-          "mobileNo": "xxxxxxxxx",
-          "empId": "3232",
-          "gender": "Male",
-          "project": "FHIR",
-          "skills": [{
-              "primary_skills": ["Angular", "Java"],
-              "Secondary_skills": ["NodeJs", "Hibernate", "Springboot"]
-          }],
-          "allSkills": [{
-              "primary_skills": ["Angular", "Java", "micro", "HTML", "CSS", "JQUERY","a","b","c","d","e"],
-              "Secondary_skills": ["NodeJs", "Hibernate", "Springboot", "Bootstrap", "saas", "less"]
-          }],
-          "location": "Banglore",
-          "allLocations": ["hyderabad", "Kochi", "Trivandrum", "Banglore", "Noida"],
-          "allGender": ['Male', 'female']
-      }
+      this.user ={
+        "id": "61acbd7b5252c97827d14640",
+        "firstName": "gyana",
+        "middleName": "ranjan",
+        "lastName": "patra",
+        "email": "gyana@ust.com",
+        "empId": 196039,
+        "gender": "Male",
+        "designation": {
+            "id": "61ad9dd95252c97827d146da",
+            "title": "System Analyst"
+        },
+        "mobileNo": 9853048728,
+        "location": {
+            "id": "61ad9dd95252c97827d146db",
+            "name": "Bangalore"
+        },
+        "techRoles": [
+            {
+                "id": "61ad9dd95252c97827d146d6",
+                "title": "Dev"
+            },
+            {
+                "id": "61ad9dd95252c97827d146d7",
+                "title": "Ops"
+            }
+        ],
+        "projects": [
+            {
+                "pid": "61ad9dd95252c97827d146d8",
+                "pname": "FHIR",
+                "description": "FHIR Project",
+                "status": true,
+                "startdate": null,
+                "enddate": null
+            },
+            {
+                "pid": "61ad9dd95252c97827d146d9",
+                "pname": "Health_Insight",
+                "description": "Health_Insight Project",
+                "status": false,
+                "startdate": null,
+                "enddate": null
+            }
+        ],
+        "skillSets": [
+            {
+                "technology": "Spring Data",
+                "skillCategory": "primary"
+            },
+            {
+                "technology": "Spring sec",
+                "skillCategory": "secondary"
+            }
+        ]
+    }
+
+    this.allInfos = {
+
+        "commonInfo":{
+        "locations":['Bangalore','Kochi','Trivandrum'],
+        "skillSets": [
+            {
+                "technology": "Spring Data",
+                "skillCategory": "primary"
+            },
+            {
+                "technology": "Spring sec",
+                "skillCategory": "secondary"
+            },
+            {
+                "technology": "Angular",
+                "skillCategory": "primary"
+            },
+            {
+                "technology": "Javascript",
+                "skillCategory": "secondary"
+            }
+        ]
+    }
+}
+    this.allGender = ['Male','Female',"Others"]
+
   }
 
 
@@ -110,6 +185,13 @@ export class MyinfoComponent implements OnInit {
           passwordValidators.push(Validators.required);
       }
 
+      for(let k =0;k<this.user.projects.length;k++){
+          this.projects.push(this.user.projects[k]['pname'])
+      }
+      for(let k =0;k<this.user.techRoles.length;k++){
+        this.roles.push(this.user.techRoles[k]['title'])
+    }
+
       this.getSelectedPrimnSec(); //get the primary secondary slected and all skills
 
       //initalise form controls
@@ -120,7 +202,6 @@ export class MyinfoComponent implements OnInit {
           mobileNo: ['', Validators.required],
           gender: ['', Validators.required],
           project: ['', Validators.required],
-          skills: ['', Validators.required],
           location: [this.user.location, Validators.required],
           selectedPrim: [this.selectedPrimItems],
           selectedSec: [this.selectedSecItems]
@@ -137,38 +218,56 @@ export class MyinfoComponent implements OnInit {
       this.dropdownListPrim = [];
       this.dropdownListSec = [];
       //retrieve selected primary skills
-      for (let i = 0; i < this.user.skills.length; i++) {
-          this.primarySkillArray = this.user.skills[i]['primary_skills'];
-          this.secondarySkillArray = this.user.skills[i]['Secondary_skills'];
-          for (var j = 0; j < this.user.skills[i]['primary_skills'].length; j++) {
-              var obj = {};
-              obj['skillId'] = j;
-              obj['skill'] = this.user.skills[i]['primary_skills'][j];
-              this.selectedPrimItems.push(obj);
+      for (let i = 0; i < this.user.skillSets.length; i++) {
+          if(this.user.skillSets[i].skillCategory=='primary'){
+              this.primary.push(this.user.skillSets[i].technology)
           }
-          for (var j = 0; j < this.user.skills[i]['Secondary_skills'].length; j++) {
-              var obj = {};
-              obj['skillId'] = j;
-              obj['skill'] = this.user.skills[i]['Secondary_skills'][j];
-              this.selectedSecItems.push(obj);
+          if(this.user.skillSets[i].skillCategory=='secondary'){
+              this.secondary.push(this.user.skillSets[i].technology)
           }
+
       }
+      
+      for (var j = 0; j < this.primary.length; j++) {
+        var obj = {};
+        obj['skillId'] = j;
+        obj['skill'] = this.primary[j];
+        this.selectedPrimItems.push(obj);
+    }
+    for (var j = 0; j < this.secondary.length; j++) {
+        var obj = {};
+        obj['skillId'] = j;
+        obj['skill'] = this.secondary[j];
+        this.selectedSecItems.push(obj);
+    }
 
       // //retrieve All skills
-      for (let i = 0; i < this.user.allSkills.length; i++) {
-          for (var j = 0; j < this.user.allSkills[i]['primary_skills'].length; j++) {
-              var objDrop = {};
-              objDrop['skillId'] = j;
-              objDrop['skill'] = this.user.allSkills[i]['primary_skills'][j];
-              this.dropdownListPrim.push(objDrop);
-          }
-          for (var j = 0; j < this.user.allSkills[i]['Secondary_skills'].length; j++) {
-              var objDrop = {};
-              objDrop['skillId'] = j;
-              objDrop['skill'] = this.user.allSkills[i]['Secondary_skills'][j];
-              this.dropdownListSec.push(objDrop);
-          }
-      }
+      for (let i = 0; i < this.allInfos.commonInfo.skillSets.length; i++) {
+
+        if(this.allInfos.commonInfo.skillSets[i].skillCategory=='primary'){
+            this.allPrimary.push(this.allInfos.commonInfo.skillSets[i].technology)
+        }
+        if(this.allInfos.commonInfo.skillSets[i].skillCategory=='secondary'){
+            this.allSecondary.push(this.allInfos.commonInfo.skillSets[i].technology)
+        }
+    }
+
+    console.log("allprim",this.allPrimary)
+    console.log("allsec",this.allSecondary)
+
+      for (var j = 0; j < this.allPrimary.length; j++) {
+        var objDrop = {};
+        objDrop['skillId'] = j;
+        objDrop['skill'] = this.allPrimary[j];
+        this.dropdownListPrim.push(objDrop);
+    }
+    for (var j = 0; j < this.allSecondary.length; j++) {
+        var objDrop = {};
+        objDrop['skillId'] = j;
+        objDrop['skill'] = this.allSecondary[j];
+        this.dropdownListSec.push(objDrop);
+    }
+    console.log(this.dropdownListPrim)
   }
   //function get the primary secondary slected and all skills ends
 
@@ -185,6 +284,10 @@ export class MyinfoComponent implements OnInit {
     this.isEditForm = true;
       this.selectedPrimItems = [];
       this.selectedSecItems = [];
+      this.primary=[];
+      this.secondary=[];
+      this.allPrimary = [];
+      this.allSecondary = [];
       // this.primarySkillBoolean = true;
       this.getSelectedPrimnSec();
       console.log( this.selectedPrimItems);
@@ -200,13 +303,12 @@ export class MyinfoComponent implements OnInit {
 
       this.editProfileForm.patchValue({
           empId: this.user.empId,
-          username: this.user.username,
-          techstack: this.user.techstack,
+          username: this.user.email,
+          techstack: this.roles.join(", "),
           mobileNo: this.user.mobileNo,
-          project: this.user.project,
-          skills: this.user.skills,
+          project: this.projects.join(", "),
           gender: this.user.gender,
-          location: this.user.location,
+          location: this.user.location.name,
           selectedPrim: [this.selectedPrimItems],
           selectedSec: [this.selectedSecItems]
 
@@ -216,24 +318,24 @@ export class MyinfoComponent implements OnInit {
 
   //on  primary skill skill select on edit
   onItemSelectPrimary(item: any) {
-      this.primarySkillArray.push(item.skill);
+      this.primary.push(item.skill);
   }
 
   //on  secondary skill skill select on edit
   onItemSelectSecondary(item: any) {
-      this.secondarySkillArray.push(item.skill);
+      this.secondary.push(item.skill);
 
   }
 
   //on  primary skill skill deselect on edit
   onItemDeSelectPrimary(item: any) {
-      this.primarySkillArray = this.primarySkillArray.filter(el => el !== item.skill);
+      this.primary = this.primary.filter(el => el !== item.skill);
 
   }
 
   //on  primary skill skill deselect on edit
   onItemDeSelectSecondary(item: any) {
-      this.secondarySkillArray = this.secondarySkillArray.filter(el => el !== item.skill);
+      this.secondary = this.secondary.filter(el => el !== item.skill);
 
   }
 
@@ -276,14 +378,42 @@ export class MyinfoComponent implements OnInit {
 
   onSubmit() {
       this.submitted = true;
+    console.log(this.f)
+    this.skillSet = [];
+      for(let i=0;i<this.f.selectedPrim.value.length;i++){
+          this.skillSet.push({"technology":this.f.selectedPrim.value[i].skill,"skillCategory": "primary"})
+      }
+      for(let i=0;i<this.f.selectedSec.value.length;i++){
+        this.skillSet.push({"technology":this.f.selectedSec.value[i].skill,"skillCategory": "secondary"})
+    }
 
       // stop here if form is invalid
       if (this.editProfileForm.invalid) {
           return;
       } else {
-          this.isEditForm = false;
+        this.alertService.success("Your changes are saved successfully")
+        this.isEditForm = false;
+        this.data = {
+            "userInfo":{
+                
+                    "id": this.user.id,
+                    "firstName":this.user.firstName,
+                    "middleName": this.user.middleName,
+                    "lastName": this.user.lastName,
+                    "email": this.user.email,
+                    "empId": this.user.empId,
+                    "gender": this.f.gender.value,
+                    "designation": this.user.designation.title,
+                    "mobileNo": this.user.mobileNo,
+                    "location": this.f.location.value.name,
+                    "techRoles":this.f.techstack.value.split(", "),
+                    "projects": this.user.projects,
+                    "skillSets": this.skillSet
+                }
+            
+        }
 
-      }
+     }
 
   }
 

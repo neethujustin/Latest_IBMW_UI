@@ -3,7 +3,7 @@
 
 a { cursor: pointer; }
 body{
-  font: normal normal normal 14px/16px Helvetica Neue
+  font: normal normal 300 18px/22px Helvetica Neue;
 }
 h5{
   font-size: 30px;
@@ -28,12 +28,12 @@ h5{
     box-sizing: content-box;
 }
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; }
 .page-item.active .page-link {
-    z-index: 3;
-    color: #fff;
-    background-color: #EF3724;
-    border-color: #f8f9fa;
+  z-index: 3;
+  color: #fff;
+  background-color: #2184f5;
+  border-color: #f8f9fa;
 }
 .file {
     position: relative;
@@ -66,5 +66,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     /* text-align: center; */
     cursor: pointer;
   }
+
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0,0,0,.05);
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+}
   
   
